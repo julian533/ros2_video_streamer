@@ -81,9 +81,6 @@ WORKDIR /root/pics
 RUN wget https://www.stuttgarter-zeitung.de/media.media.f6639fa1-647a-46aa-ae14-434492c48009.16x9_1024.jpg
 RUN wget https://yt3.ggpht.com/a/AGF-l78ut3ZR_b5nEKjyfgFf0oa3jeuyC2yx40rGHg=s288-c-k-c0xffffffff-no-rj-mo
 RUN wget https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500
-RUN mv https://www.stuttgarter-zeitung.de/media.media.f6639fa1-647a-46aa-ae14-434492c48009.16x9_1024.jpg  gesang.jpg
-RUN mv https://yt3.ggpht.com/a/AGF-l78ut3ZR_b5nEKjyfgFf0oa3jeuyC2yx40rGHg=s288-c-k-c0xffffffff-no-rj-mo  gesang2.jpg
-RUN mv https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500 flower.jpg
 
 # Reset workdir to home-folder
 WORKDIR /root
