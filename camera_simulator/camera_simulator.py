@@ -85,10 +85,11 @@ class CameraSimulator(Node):
 
             self.timer = self.create_timer(1.0 / video_fps, self.image_callback)
         else:
-            for image_path in natsorted(os.listdir(kwargs["path"]), key=lambda y: y.lower()):
-                if image_path.endswith(".jpg") or image_path.endswith(".jpeg") or image_path.endswith(".png"):
-                    self.image_callback(os.path.join(kwargs["path"], image_path))
-            self.get_logger().info("All images have been published")
+            while True:
+                for image_path in natsorted(os.listdir(kwargs["path"]), key=lambda y: y.lower()):
+                    if image_path.endswith(".jpg") or image_path.endswith(".jpeg") or image_path.endswith(".png"):
+                        self.image_callback(os.path.join(kwargs["path"], image_path))
+                self.get_logger().info("All images have been published")
 
     def image_callback(self, image_path=None):
         if self.type == "video":
