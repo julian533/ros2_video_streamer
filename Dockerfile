@@ -38,7 +38,9 @@ RUN pip3 install pytest==5.0
 RUN pip3 install setuptools==40.0
 RUN pip3 install colcon-common-extensions
 RUN pip3 install -U PyYAML   
-RUN pip3 install  natsort
+RUN pip3 install numpy
+RUN pip3 install natsort
+RUN pip3 install opencv-python 
 # install opencv
 WORKDIR /root
 RUN mkdir opencv_build
@@ -63,15 +65,18 @@ WORKDIR /root
 RUN git clone https://github.com/ros-perception/vision_opencv.git
 WORKDIR /root/vision_opencv
 RUN git checkout ros2
-RUN colcon build --symlink-install
-RUN /bin/bash -c "source .install/setup.bash"
+Run git branch
+#RUN sudo apt install libboost-python1.58.0
+#RUN /bin/bash -c "source /opt/ros/eloquent/setup.bash"
+#RUN  /bin/bash -c "colcon build --symlink-install"
+#RUN /bin/bash -c "source ./install/setup.bash"
 
 #Install video stream
 WORKDIR /root
 RUN git clone https://github.com/julian533/ros2_video_streamer.git
 Run cd ros2_video_streamer
-Run colcon build --symlink-install
-RUN /bin/bash -c "source ./install/setup.bash"
+#Run colcon build --symlink-install
+#RUN /bin/bash -c "source ./install/setup.bash"
 
 
 # Get example pics
@@ -89,6 +94,6 @@ WORKDIR /root
 RUN /bin/bash -c "source /opt/ros/eloquent/setup.bash"
 
 # Remove apt lists (for storage efficiency)
-RUN rm -rf /var/lib/apt/lists/*
+#RUN rm -rf /var/lib/apt/lists/*
 
 CMD ["bash"]
