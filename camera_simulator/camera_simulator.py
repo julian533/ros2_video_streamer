@@ -23,7 +23,8 @@ import cv2
 import os
 import yaml
 from natsort import natsorted
-
+import time
+import numpy as np
 
 class CameraSimulator(Node):
     """
@@ -36,7 +37,7 @@ class CameraSimulator(Node):
     def __init__(self, **kwargs):
         super().__init__("camera_simulator")
 
-        image_topic_ = self.declare_parameter("image_topic", "/camera/color/image_raw").value
+        image_topic_ = self.declare_parameter("image_topic", "/image/image_raw").value
         camera_info_topic_ = self.declare_parameter("camera_info_topic", "/image/camera_info").value
 
         self.frame_id_ = self.declare_parameter("frame_id", "camera").value
@@ -86,10 +87,24 @@ class CameraSimulator(Node):
             self.timer = self.create_timer(1.0 / video_fps, self.image_callback)
         else:
             while True:
-                for image_path in natsorted(os.listdir(kwargs["path"]), key=lambda y: y.lower()):
-                    if image_path.endswith(".jpg") or image_path.endswith(".jpeg") or image_path.endswith(".png"):
-                        self.image_callback(os.path.join(kwargs["path"], image_path))
-                self.get_logger().info("All images have been published")
+                self.publish_random_images()
+            #for image_path in natsorted(os.listdir(kwargs["path"]), key=lambda y: y.lower()):
+            #    if image_path.endswith(".jpg") or image_path.endswith(".jpeg") or image_path.endswith(".png"):
+            #        self.image_callback(os.path.join(kwargs["path"], image_path))
+            #self.get_logger().info("All images have been published")
+
+    def publish_random_images(self):
+        for i in range(5, 800, 5):
+            image_np = np.uint8(np.random.randint(0, 255, size=(i, i, 3)))
+            # Convert the image to a message
+            time_msg = self.get_time_msg()
+            img_msg = self.get_image_msg(image_np, time_msg)
+            #if self.calib:
+            #    camera_info_msg = self.get_camera_info(time_msg)
+            #self.camera_info_publisher_.publish(camera_info_msg)
+            self.image_publisher_.publish(img_msg)
+            time.sleep(1)
+            self.get_logger().info("Published image of size: " + str(i) + " x " + str(i))
 
     def image_callback(self, image_path=None):
         if self.type == "video":
