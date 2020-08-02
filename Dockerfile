@@ -83,9 +83,12 @@ Run cd ros2_video_streamer
 WORKDIR /root
 RUN mkdir pics
 WORKDIR /root/pics
-RUN wget https://www.stuttgarter-zeitung.de/media.media.f6639fa1-647a-46aa-ae14-434492c48009.16x9_1024.jpg
-RUN wget https://yt3.ggpht.com/a/AGF-l78ut3ZR_b5nEKjyfgFf0oa3jeuyC2yx40rGHg=s288-c-k-c0xffffffff-no-rj-mo
+RUN wget https://welpenknigge.de/wp-content/uploads/2018/10/Beagle-Welpe-an-der-Leine-678x381.jpg
+RUN wget https://static.schoener-wohnen.de/bilder/be/41/64147/galleryimage/tv-moebel-dauphin-home-mlqe-046.jpg
+RUN wget https://goodstock.photos/wp-content/uploads/2018/01/Cars-on-Street-Through-Chinatown.jpg
 RUN wget https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500
+RUN wget https://cdn.londonandpartners.com/visit/general-london/transport/65571-640x360-cars_in_london_640.jpg
+RUN wget https://cdn-images-1.medium.com/max/872/1*EYFejGUjvjPcc4PZTwoufw.jpeg
 
 # Reset workdir to home-folder
 WORKDIR /root
