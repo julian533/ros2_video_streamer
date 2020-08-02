@@ -96,7 +96,7 @@ class CameraSimulator(Node):
             #self.get_logger().info("All images have been published")
 
     def publish_random_images(self):
-        for i in range(5, 800, 5):
+        for i in range(200, 800, 25):
             image_np = np.uint8(np.random.randint(0, 255, size=(i, i, 3)))
             # Convert the image to a message
             time_msg = self.get_time_msg()
@@ -105,8 +105,8 @@ class CameraSimulator(Node):
             #    camera_info_msg = self.get_camera_info(time_msg)
             #self.camera_info_publisher_.publish(camera_info_msg)
             self.image_publisher_.publish(img_msg)
-            time.sleep(1)
             self.get_logger().info("Published image of size: " + str(i) + " x " + str(i))
+            time.sleep(1)
 
     def image_callback(self, image_path=None):
         if self.type == "video":
