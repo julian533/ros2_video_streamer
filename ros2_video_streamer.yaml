@@ -1,0 +1,31 @@
+  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ros2-video_streamer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ros2-video_streamer
+  template:
+    metadata:
+      labels:
+        app: ros2-video_streamer
+    spec:
+      containers:
+      - image: naju1012/ros2_video_streamer:latest
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
+        #command: ["/bin/bash", "-c"]
+        #args: ["cd tf_ws; colcon build;source install/local_setup.sh;source /root/tf_ws/install/local_setup.sh;source /opt/ros/eloquent/setup.sh;ros2 run tf_detection_py server"]
+        securityContext:
+          privileged: true
+        imagePullPolicy: IfNotPresent
+        name: ros2-video_streamer
+      imagePullSecrets:
+      - name: docker-registry
+      nodeSelector:
+        location: lab2
+      restartPolicy: Always
+      hostNetwork: true
