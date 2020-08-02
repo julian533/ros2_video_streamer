@@ -2,16 +2,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ros2-video_streamer
+  name: ros2-video-streamer
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ros2-video_streamer
+      app: ros2-video-streamer
   template:
     metadata:
       labels:
-        app: ros2-video_streamer
+        app: ros2-video-streamer
     spec:
       containers:
       - image: naju1012/ros2_video_streamer:latest
@@ -22,7 +22,7 @@ spec:
         securityContext:
           privileged: true
         imagePullPolicy: IfNotPresent
-        name: ros2-video_streamer
+        name: ros2-video-streamer
       imagePullSecrets:
       - name: docker-registry
       nodeSelector:
