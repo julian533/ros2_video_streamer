@@ -14,7 +14,7 @@ spec:
         app: ros2-video-streamer
     spec:
       containers:
-      - image: naju1012/ros2_video_streamer:latest
+      - image: naju1012/ros2_video_streamer:dev
         command: [ "/bin/bash", "-c", "--" ]
         args: [ "while true; do sleep 30; done;" ]
         #command: ["/bin/bash", "-c"]
